@@ -1,0 +1,38 @@
+<div id="header">
+  <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile colspan="1">
+      <mat-card class="card" id="icon">
+        <mat-card-content>
+          <mat-icon id="totalicon" [matBadge]="count" matBadgeSize="medium">perm_identity</mat-icon>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-card class="card">
+        <mat-card-content>
+          <p>
+            Highest earning Employee: {{maxsalary.fullName}} ({{currency + ' ' + maxsalary.salary}})
+          </p>
+          <p>
+            Employee most recently joined: {{recentjoin.fullName}} ({{recentjoin.dateJoined | date:'dd MMM yyyy'}})
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div>
+  <table matSort (matSortChange)="sorting($event)" id="tblEmp" [matSortActive]="activeSort" [matSortDirection]="activeDirection">
+    <tr>
+      <th mat-sort-header="fullName">Full Name</th>
+      <th mat-sort-header="dateJoined">Date Joined</th>
+      <th mat-sort-header="salary">Salary</th>
+    </tr>
+  
+    <tr *ngFor="let emp of sorted">
+      <td>{{emp.fullName}}</td>
+      <td>{{emp.dateJoined | date:'dd MMM yyyy'}}</td>
+      <td>{{currency + ' ' + emp.salary}}</td>
+    </tr>
+  </table>  
+</div>
